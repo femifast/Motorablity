@@ -1,0 +1,612 @@
+{
+  "F100": {
+    "description": "Lagos (Apapa Road Flyover south of Iganmu) - Badagry - Benin",
+    "length": 158.704,
+    "alignment": "Inter-City"
+  },
+  "F101": {
+    "description": "Ikorodu (A1) - Agbowa - Epe - Sunmage and terminating near Oso (A121)",
+    "length": 34.677,
+    "alignment": "Inter-City"
+  },
+  "F101-1": {
+    "description": "Sunmage (F101) - Iwopin",
+    "length": 38.628,
+    "alignment": ""
+  },
+  "F102": {
+    "description": "Shagamu (Al) - Owode - Abeokuta - Meko - Illara - Benin (RNIE4)",
+    "length": 121.35,
+    "alignment": "Inter-City"
+  },
+  "F103": {
+    "description": "Effurun - Ughelli - Uwherum - Patani - Mbiama - Ahoada - Rumukoroshe - Nchia - Opobo - Eket - Ikot Ubo - Oron",
+    "length": 362.222,
+    "alignment": "Inter-City"
+  },
+  "F103-1": {
+    "description": "Okrika - Nchia (F103)",
+    "length": 10.189,
+    "alignment": "Inter-City"
+  },
+  "F104": {
+    "description": "Aba - Azumini - Etinam - Ndiya - Ikot Ubo (F103)",
+    "length": 98.485,
+    "alignment": "Inter-City"
+  },
+  "F105": {
+    "description": "Awbele (Benin border) - Oja Odan - Ilaro - Owode (Fl02)",
+    "length": 99.319,
+    "alignment": "Inter-City"
+  },
+  "F106": {
+    "description": "Owerri - Nguru - Etiti (A3)",
+    "length": 50.099,
+    "alignment": "Inter-City"
+  },
+  "F107": {
+    "description": "Umuahia - Bende - Ohafia (F234)",
+    "length": 46.661,
+    "alignment": "Inter-City"
+  },
+  "F108": {
+    "description": "Arochukwu - Ikot Okpora - Orira (A4)",
+    "length": 36.959,
+    "alignment": "Inter-City"
+  },
+  "F109": {
+    "description": "Amukpe (A2) - Eku - Abraka - Obiaruku - Umutu",
+    "length": 69.855,
+    "alignment": "Inter-City"
+  },
+  "F110": {
+    "description": "Port of Kolo - Ologbo (A2)",
+    "length": 31.839,
+    "alignment": "Inter-City"
+  },
+  "F111": {
+    "description": "Ihiala (A6) - Orlu - Umuduru (A3)",
+    "length": 49.288,
+    "alignment": "Inter-City"
+  },
+  "F112": {
+    "description": "Onitsha - Nnewi - Okigwi - Afikpo",
+    "length": 134.391,
+    "alignment": "Inter-City"
+  },
+  "F113": {
+    "description": "Ozalla (F233) - Agbani - Okposi - Abba - Omega - Itigidi - Ediba - Ugep (A4)",
+    "length": 108.123,
+    "alignment": "Inter-City"
+  },
+  "F114": {
+    "description": "Igbogor (A121) - Okomo - Okeluse - Ute - Sobe (A122)",
+    "length": 63.468,
+    "alignment": "Inter-City"
+  },
+  "F115": {
+    "description": "Ifon (A122) - Uzebba - Sabon Gida Ora - Ozalla - Ekpoma (A2)",
+    "length": 64.912,
+    "alignment": "Inter-City"
+  },
+  "F116": {
+    "description": "Irrua (A2) - Uromi - Ubiaja - Illushi - Adani - Nsukka",
+    "length": 143.189,
+    "alignment": "Inter-City"
+  },
+  "F117": {
+    "description": "Ilesha (A122) - Ado Ekiti - Ikare - Ishua - Ibillo - Auchi - Agenebode - Idah - Nsukka Eha Amufu - Nkalagu (A343)  ",
+    "length": 476.221,
+    "alignment": "Inter-City"
+  },
+  "F118": {
+    "description": "Wasimi (Benin border) - Iseyin - Ovo - lwo - Gbongan (A122)",
+    "length": 217.256,
+    "alignment": "Inter-City"
+  },
+  "F118-1": {
+    "description": "Gbonga(F118) - Ode Omu - Sekona (F205)",
+    "length": 21.997,
+    "alignment": "Inter-City"
+  },
+  "F119": {
+    "description": "Omuo - Kabba - Okene - Ajaokuta - Itobe and - Ayangba (A233)",
+    "length": 214.422,
+    "alignment": "Inter-City"
+  },
+  "F120": {
+    "description": "Gakem (A4) - Obudu and - Obudu Ranch",
+    "length": 92.127,
+    "alignment": "Inter-City"
+  },
+  "F121": {
+    "description": "Makurdi (A3) - Abinsi - Yandev - Gburuku - Zaki Biam (A4)",
+    "length": 151.372,
+    "alignment": "Inter-City"
+  },
+  "F122": {
+    "description": "Rafin Kada - Sabon Gida - Ivaissa - Gembu - Bang (Cameroun border)",
+    "length": 248.714,
+    "alignment": "Inter-City"
+  },
+  "F123": {
+    "description": "Beli - Jamtari (A8)",
+    "length": 48.196,
+    "alignment": "Inter-City"
+  },
+  "F124": {
+    "description": "Share (A1) - Ndeji - Pategi - Eggan - Baro - Abaji - Nassarawa - Lafia - Shendam (F125)",
+    "length": 462.343,
+    "alignment": "Inter-City"
+  },
+  "F124-1": {
+    "description": "Sheshi (F124) - Lafiagi on the River Niger",
+    "length": 0.0,
+    "alignment": "Inter-City"
+  },
+  "F125": {
+    "description": "Wamba (A3) - Shendam - Langtang - Wase Bashar - Bambur (F250)",
+    "length": 335.231,
+    "alignment": "Inter-City"
+  },
+  "F126": {
+    "description": "Zungeru - Minna - Izom (A124)",
+    "length": 156.147,
+    "alignment": "Inter-City"
+  },
+  "F127": {
+    "description": "Kafanchan (A235) - Vom (A3)",
+    "length": 31.043,
+    "alignment": "Inter-City"
+  },
+  "F128": {
+    "description": "Benin border - Rofi-a-Bin Yauri - Rijau - Dan Gulbi - Chafe - Dayi - Gwarzo - Kano - Gumel Malammaduri - Hadejia - Birniwa - Nguru - Gashua - Geidam - Damasak - Bisagana on Lake Chad",
+    "length": 1316.722,
+    "alignment": "Inter-City"
+  },
+  "F128-1": {
+    "description": "Gumel (F128) - Maigatari (Niger border)",
+    "length": 23.376,
+    "alignment": "Inter-City"
+  },
+  "F128-2": {
+    "description": "Nguru (F128) - Machina (Niger border)",
+    "length": 54.026,
+    "alignment": "Inter-City"
+  },
+  "F128-3": {
+    "description": "Geidam (F128) - (Niger border)",
+    "length": 30.287,
+    "alignment": "Inter-City"
+  },
+  "F129": {
+    "description": "Gombe - Hinna - Gondi - Biu (A4)",
+    "length": 128.939,
+    "alignment": "Inter-City"
+  },
+  "F130": {
+    "description": "Kogin Hugum (A237) - Dutse Azare - Zindiwa (F131)",
+    "length": 229.72,
+    "alignment": "Inter-City"
+  },
+  "F131": {
+    "description": "Wudil (A237) - Gaya - Gammayin - Katagum - Udobo - Potiskum (A3)",
+    "length": 294.176,
+    "alignment": "Inter-City"
+  },
+  "F132": {
+    "description": "Kalgo (F203) - Jega - Dakin Takwas - Anka - Majinchi (A126)",
+    "length": 259.516,
+    "alignment": "Inter-City"
+  },
+  "F133": {
+    "description": "Kamba (F203) - Bwi - Argungu - Jaredi (A1)",
+    "length": 245.027,
+    "alignment": "Inter-City"
+  },
+  "F134": {
+    "description": "Gubio (F256) - Gajiram - Dikwa (A3)",
+    "length": 154.632,
+    "alignment": "Inter-City"
+  },
+  "F135": {
+    "description": "Kukawa - Kauwa (F258) - Baga (Lake Chad)",
+    "length": 44.505,
+    "alignment": "Inter-City"
+  },
+  "F136": {
+    "description": "Dutsin Ma (F219) - Tareshi - Kankiya (A9)",
+    "length": 46.625,
+    "alignment": "Inter-City"
+  },
+  "F137": {
+    "description": "Kaura Namoda - Danja - Jibiya (A9)",
+    "length": 97.368,
+    "alignment": "Inter-City"
+  },
+  "F138": {
+    "description": "Sokoto (A1)- Goronyo - Sabon Birni (F218)",
+    "length": 149.572,
+    "alignment": "Inter-City"
+  },
+  "F139": {
+    "description": "Ankpa (A233) - Abakpa - Boju Ega (F238)",
+    "length": 0.0,
+    "alignment": "Inter-City"
+  },
+  "F200": {
+    "description": "Mowo (F100) - Ilaro - Abeokuta Iseying - Ago Are - Kishi (A7)",
+    "length": 361.341,
+    "alignment": "Inter-City"
+  },
+  "F201": {
+    "description": "Kaiama (A7) - Wawa - New Bussa - Yelwa (A1)",
+    "length": 154.51,
+    "alignment": "Inter-City"
+  },
+  "F202": {
+    "description": "Ago Are - Shaki - Ilesha - Okuta - Kosubosu (A7)",
+    "length": 128.888,
+    "alignment": "Inter-City"
+  },
+  "F203": {
+    "description": "Niger (N8) - Kamba - Kalgo - Birnin Kebbi - Argungu (F132)",
+    "length": 167.396,
+    "alignment": "Inter-City"
+  },
+  "F204": {
+    "description": "Itokin (F101) - Ibefun - Ijebu Ode - Idi Ayunre (A1)",
+    "length": 74.422,
+    "alignment": "Inter-City"
+  },
+  "F205": {
+    "description": "Ijebu Ode (A121) - Ijebu Igbo - Ile Ife - Shekona - Oshogbo - Offa - Ajasse (A123)",
+    "length": 246.734,
+    "alignment": "Inter-City"
+  },
+  "F206": {
+    "description": "Ilesha (A122) - Oshogbo - Ogbomosho and - Igbetti (A7)",
+    "length": 163.201,
+    "alignment": "Inter-City"
+  },
+  "F207": {
+    "description": "Ondo (F209) - Oke Igbo - Ile Ife, (A122)",
+    "length": 71.372,
+    "alignment": "Inter-City"
+  },
+  "F208": {
+    "description": "Ita Nla (F209) - Ile Oluji - Ipetu, (A122)",
+    "length": 41.265,
+    "alignment": "Inter-City"
+  },
+  "F209": {
+    "description": "Okitipupa - Ore - Ondo - Ita Nla - Akure - Ado - Ekiti - Omu Aran (A123)",
+    "length": 215.895,
+    "alignment": "Inter-City"
+  },
+  "F210": {
+    "description": "Wawa (F201) - Luma - Rofia (F128)",
+    "length": 130.606,
+    "alignment": "Inter-City"
+  },
+  "F211": {
+    "description": "Mokwa (A1) - Eban - New Bussa (F201)",
+    "length": 100.203,
+    "alignment": "Inter-City"
+  },
+  "F212": {
+    "description": "Wara on the edge of the Kainji Lake - Auna - Ibe - (A1)",
+    "length": 75.767,
+    "alignment": "Inter-City"
+  },
+  "F213": {
+    "description": "F132 south of Gunmi - Gunmi - Jabo (A1)",
+    "length": 66.398,
+    "alignment": "Inter-City"
+  },
+  "F214": {
+    "description": "Kontagora (A125) - Rijau - Zuru - Dakin Takwas (F132)",
+    "length": 198.291,
+    "alignment": "Inter-City"
+  },
+  "F215": {
+    "description": "Owo (A122) - Ikare - Omuo - Egbe - Pategi - Bida - Zungeru - Tegina (A125)",
+    "length": 383.802,
+    "alignment": "Inter-City"
+  },
+  "F216": {
+    "description": "Sabon Birnin Gwari (A125) - Birnin Gwari - Funtua - Malumfashi - Dayi - Yashi (A9)",
+    "length": 273.789,
+    "alignment": "Inter-City"
+  },
+  "F217": {
+    "description": "Birnin Gwari (F216) - Dan Gulbi - Anka (F132)",
+    "length": 177.347,
+    "alignment": "Inter-City"
+  },
+  "F218": {
+    "description": "Gusau (A126) - Kunya - Kaura Namoda - Shinkafe - Sabon Birni - Niger border",
+    "length": 196.277,
+    "alignment": "Inter-City"
+  },
+  "F219": {
+    "description": "Malumfashi (F216) - Kankara - Dutsin Ma - Katsina - Daura - Zango",
+    "length": 274.13,
+    "alignment": "Inter-City"
+  },
+  "F220": {
+    "description": "A122 south of Ipele - Ipele - Ishua - Kabba (A123)",
+    "length": 101.456,
+    "alignment": "Inter-City"
+  },
+  "F221": {
+    "description": "Aiyetoro (A123) - Akutukpa - Eggan - Agaie (A124)",
+    "length": 149.787,
+    "alignment": "Inter-City"
+  },
+  "F222": {
+    "description": "Ogharefe - Sapoba - Agbor - Uromi (F116)",
+    "length": 148.002,
+    "alignment": "Inter-City"
+  },
+  "F223": {
+    "description": "Ughelli (F103) - Ozoro - Kwale - Ogwashi Uki - Asaba (A232)",
+    "length": 138.055,
+    "alignment": "Inter-City"
+  },
+  "F224": {
+    "description": "Kwale - Umutu - Agbor (A232)",
+    "length": 92.068,
+    "alignment": "Inter-City"
+  },
+  "F225": {
+    "description": "Onitsha (A6) - Aguleri - Adani (F116)",
+    "length": 79.036,
+    "alignment": "Inter-City"
+  },
+  "F226": {
+    "description": "Ifite Ukpo east of Onitsha (A232) - Awkuzu - Aguleri (F225)",
+    "length": 19.364,
+    "alignment": "Inter-City"
+  },
+  "F227": {
+    "description": "Brass - Nembe Yenagoa - Yenegue - Mbiama (Fl03) ",
+    "length": 106.195,
+    "alignment": "Inter-City"
+  },
+  "F228": {
+    "description": "Buguma - Degema - Ahoada - Ebocha - Uli (A6)",
+    "length": 154.455,
+    "alignment": "Inter-City"
+  },
+  "F229": {
+    "description": "Port Harcourt - Igrita - Elele - Owerri - Orlu - Awka (A232)",
+    "length": 215.601,
+    "alignment": "Inter-City"
+  },
+  "F230": {
+    "description": "Bonny - Bomu - Chara (Fl03 )",
+    "length": 35.733,
+    "alignment": "Inter-City"
+  },
+  "F231": {
+    "description": "Igrita (F229) - Chokoehe - Ibodo - Okpalla (A6)",
+    "length": 52.055,
+    "alignment": "Inter-City"
+  },
+  "F232": {
+    "description": "Opobo - Abak - Ikot Ekpene - Umuahia (A3)",
+    "length": 122.548,
+    "alignment": "Inter-City"
+  },
+  "F233": {
+    "description": "Awgu (A3) - Ozalla - Enugu (A343)",
+    "length": 44.992,
+    "alignment": "Inter-City"
+  },
+  "F234": {
+    "description": "Uyo - Itu - Arochukwu - Ohafia - Afikpo - Abba Omega - Abakaliki (A343)",
+    "length": 179.287,
+    "alignment": "Inter-City"
+  },
+  "F235": {
+    "description": "Okurikang (A4-1) - Akpap - Creek Town",
+    "length": 26.133,
+    "alignment": "Inter-City"
+  },
+  "F236": {
+    "description": "Cross River Mills (A4) - Obubra - a point on the A343 just east of Abakaliki",
+    "length": 45.695,
+    "alignment": "Inter-City"
+  },
+  "F237": {
+    "description": "Ikom (A4) - Obudu (F120)",
+    "length": 109.577,
+    "alignment": "Inter-City"
+  },
+  "F238": {
+    "description": "Iyahe (A343) - Oturkpo - Loko - Nasarawa - Keffi - Kachia (A235)",
+    "length": 454.887,
+    "alignment": "Inter-City"
+  },
+  "F239": {
+    "description": "Yahe (A343) - Ogoja - Shangev Tiev - Aliade (A344)",
+    "length": 125.914,
+    "alignment": "Inter-City"
+  },
+  "F240": {
+    "description": "Akwanga (A3) - Nunku - A3 just North of Fadan Ayu",
+    "length": 62.388,
+    "alignment": "Inter-City"
+  },
+  "F241": {
+    "description": "Wamba (A3) - Panyan - Pankshin - F247 northwest of Dawaki",
+    "length": 48.999,
+    "alignment": "Inter-City"
+  },
+  "F242": {
+    "description": "Takum (A12) - Rafla Kada - Wukari - Ibi - Shedam - Panyam - Bukuru (A3)",
+    "length": 355.507,
+    "alignment": "Inter-City"
+  },
+  "F243": {
+    "description": "Rahama (A236) - Yaryasd - Tudun Wada - Kafin Mayaki (A2)",
+    "length": 145.91,
+    "alignment": "Inter-City"
+  },
+  "F244": {
+    "description": "Kunya (A2) - Babura - Niger (N119",
+    "length": 96.729,
+    "alignment": "Inter-City"
+  },
+  "F245": {
+    "description": "Fustam Mata (A236) - Ningi - Samamiya (A237)",
+    "length": 192.756,
+    "alignment": "Inter-City"
+  },
+  "F246": {
+    "description": "Gubi (A3) - Miya - Ningi (F245)",
+    "length": 100.93,
+    "alignment": "Inter-City"
+  },
+  "F247": {
+    "description": "Langtang (F125) - Dawaki - Boi - Tafawa Balewa - Bauchi (A3)",
+    "length": 182.74,
+    "alignment": "Inter-City"
+  },
+  "F248": {
+    "description": "Shira (A237) - Azare (F130)",
+    "length": 38.449,
+    "alignment": "Inter-City"
+  },
+  "F249": {
+    "description": "A237 south of Misau - Misau - Azare - Gammayim - Hadejia (F128)",
+    "length": 145.076,
+    "alignment": "Inter-City"
+  },
+  "F250": {
+    "description": "Lankoviri (A4) - Lau - Mutum Daya - Filiya - Biliri (A345)",
+    "length": 131.479,
+    "alignment": "Inter-City"
+  },
+  "F251": {
+    "description": "Gombe (A345) - Bajoga - Potiskum (A3)",
+    "length": 192.299,
+    "alignment": "Inter-City"
+  },
+  "F252": {
+    "description": "Ganye (A8) - Mapeo - Yola - Jimeta (A4)",
+    "length": 137.595,
+    "alignment": "Inter-City"
+  },
+  "F252-1": {
+    "description": "Yola (F252) - Gurin",
+    "length": 38.7,
+    "alignment": "Inter-City"
+  },
+  "F253": {
+    "description": "Gombi (A13) - Biu - Damaturu - Dapchi - Baromari (F128)",
+    "length": 360.451,
+    "alignment": "Inter-City"
+  },
+  "F254": {
+    "description": "Uba (A13) - Damboa - Borozo - Beni Sheik (A3)",
+    "length": 190.091,
+    "alignment": "Inter-City"
+  },
+  "F255": {
+    "description": "Sorau (Cameroun border) - Mubi (A4-6)",
+    "length": 66.942,
+    "alignment": "Inter-City"
+  },
+  "F255-1": {
+    "description": "Mubi (A4-6) - Bukula - Cameroun border",
+    "length": 23.78,
+    "alignment": "Inter-City"
+  },
+  "F256": {
+    "description": "Maiduguri (A3) - Magumeri - Gubio - Damasak (F128)",
+    "length": 179.399,
+    "alignment": "Inter-City"
+  },
+  "F257": {
+    "description": "Maiduguri (A3) - Gajiram - Monguno (F258)",
+    "length": 139.924,
+    "alignment": "Inter-City"
+  },
+  "F258": {
+    "description": "Dikwa (A3) - Mongonu - Kauwa - Yo (F128)",
+    "length": 200.841,
+    "alignment": "Inter-City"
+  },
+  "F259": {
+    "description": "Bama (A4) - Gulumba Gana-Kala - Gambaru (A3)",
+    "length": 182.706,
+    "alignment": "Inter-City"
+  },
+  "F260": {
+    "description": "Pulka (A13) - Kirawa - Cameroun (N14)",
+    "length": 16.3,
+    "alignment": "Inter-City"
+  },
+  "F261": {
+    "description": "Rumukoroshe (A3) - Chokoche (F231)",
+    "length": 16.645,
+    "alignment": "Inter-City"
+  },
+  "F262": {
+    "description": "Lagos: Old Marina Street starting from Broad Street and southward to King George V Road",
+    "length": 2.646,
+    "alignment": "Intra-City"
+  },
+  "F263": {
+    "description": "Lagos: Ahmadu Bello Way - King George V Road - Bar Beach Road",
+    "length": 8.784,
+    "alignment": "Intra-City"
+  },
+  "F264": {
+    "description": "The Lagos Island Inner Ring Road complex starting from the southern end of Eko Bridge and along the New Marina shoreline road, and the parallel elevated structure and the Cloverleaf interchange at MacGregor Canal - Cloverleaf interchange at Idumagbo - Adeniji Adele foreshore - north end of the New Marina shoreline road",
+    "length": 20.046,
+    "alignment": "Intra-City"
+  },
+  "F265": {
+    "description": "Lagos: The outer loop dual carriageway from Wharf Road - Creek Road at Apapa - Tin Can Island - Isolo - Oshodi - Oworonshoki - Third Mainland Bridge - North foreshore line in Ikoyi - Kingsway road - south end of Falomo bridge",
+    "length": 87.565,
+    "alignment": "Intra-City"
+  },
+  "F266": {
+    "description": "Lagos: Herbert Macaulay Street from Murtala Mohammed Way at Oyingbo to Ikorodu Road",
+    "length": 9.261,
+    "alignment": "Intra-City"
+  },
+  "F267": {
+    "description": "Lagos: road enclosing the Tafawa Balewa Square complex",
+    "length": 2.361,
+    "alignment": "Intra-City"
+  },
+  "F268": {
+    "description": "Lagos: Dockyard road from Malu road through the Naval Base to Lagos Ports complex",
+    "length": 1.681,
+    "alignment": "Intra-City"
+  },
+  "F269": {
+    "description": "Lagos: International Airport Road from outer loop at Isolo to Murtala Mohammed International Airport",
+    "length": 8.984,
+    "alignment": "Intra-City"
+  },
+  "F270": {
+    "description": "Ikorodu (A1) - New Ikorodu Lighter terminal",
+    "length": 7.818,
+    "alignment": "Intra-City"
+  },
+  "F271": {
+    "description": "Lagos: Obalende (F264) - Federal Secretariat, Ikoyi",
+    "length": 3.748,
+    "alignment": "Intra-City"
+  },
+  "F272": {
+    "description": "Lagos: Obalende (F264) - State House, Ribadu Road",
+    "length": 1.304,
+    "alignment": "Intra-City"
+  }
+}

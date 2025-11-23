@@ -1,0 +1,237 @@
+{
+  "E1": {
+    "description": "Lagos Island – Ibafo – Ibadan",
+    "length": 123.3,
+    "alignment": "Inter-City"
+  },
+  "A1": {
+    "description": "Apapa Wharf - Iganmu - Western Avenue - Idi - Oro Roundabout across - Ikorodu Road - lkorodu - Shagamu - lbadan - Oyo - llorin - Jebba - Kontagora - Yelwa - Koko - Jega - Tambawal - Soko- - Illela Niger border",
+    "length": 1184.7,
+    "alignment": "Inter-City"
+  },
+  "A1-1": {
+    "description": "Malu Road (Oval Interchange) (Al) - Kirikiri maximum security prison",
+    "length": 12.688,
+    "alignment": "Intra-City"
+  },
+  "A1-2": {
+    "description": "Junction of Broad Street with Marina - Eko Bridge - junction with Al at Western Avenue (Aorta Interchange)",
+    "length": 9.038,
+    "alignment": "Intra-City"
+  },
+  "A2": {
+    "description": "Kongolam (Niger border) - Daura - Kano - Zaria - Kaduna - Abuja - Lokoja - Auchi - Benin City - Warri",
+    "length": 1616.621,
+    "alignment": ""
+  },
+  "A3": {
+    "description": "Road over railway bridge on the Port Harcourt -wnship boundary - Aba - Umu Uyo - Owerrinta - Umuahia - Umu Duru - Okigwi - Awgu - Oji River - 14.4 kilometres Corner Otukpa - Oturkpo - Aliade - Makurdi - Lafia - Akwanga - Wamba - Jos - Bauchi - Kari Potiskum - Maiduguri - Gamboru",
+    "length": 1664.026,
+    "alignment": "Inter-City"
+  },
+  "A3-1": {
+    "description": "The dual carriageway Enugu - Port Harcourt",
+    "length": 425.341,
+    "alignment": "Inter-City"
+  },
+  "A4": {
+    "description": "Calabar Township - Mbarakom - Ugep - Ikom - Ogoja - Katsina Ala - Jalingo - Yola Gombi - Bama - Maiduguri",
+    "length": 1157.751,
+    "alignment": "Inter-City"
+  },
+  "A4-1": {
+    "description": "Calabar - Itu - Ikot Ekpene (A342)",
+    "length": 76.563,
+    "alignment": "Inter-City"
+  },
+  "A4-2": {
+    "description": "Calabar - Ekang - Ajasso - Yahe",
+    "length": 130.661,
+    "alignment": "Inter-City"
+  },
+  "A4-3": {
+    "description": "Takum - Bissaula",
+    "length": 81.514,
+    "alignment": "Inter-City"
+  },
+  "A4-4": {
+    "description": "Jimeta - Yoka",
+    "length": 21.05,
+    "alignment": "Inter-City"
+  },
+  "A4-5": {
+    "description": "Jiberu - Sorau",
+    "length": 87.839,
+    "alignment": "Inter-City"
+  },
+  "A4-6": {
+    "description": "A4 - Mubi",
+    "length": 18.13,
+    "alignment": "Inter-City"
+  },
+  "A4-7": {
+    "description": "Bama - Dar-El-Jimeil - Banki - Cameroun border",
+    "length": 138.343,
+    "alignment": "Inter-City"
+  },
+  "A5": {
+    "description": "South of Carter Bridge on Lagos Island - Denton Street - Clifford Street - City Way - Yaba Roundabout - Agege Motor Road Agege - Sango Otta - Abeokuta - Ibadan",
+    "length": 270.01,
+    "alignment": "Inter-City"
+  },
+  "A5-1": {
+    "description": "Benin - Sango Otta (A5)",
+    "length": 63.029,
+    "alignment": "Inter-City"
+  },
+  "A6": {
+    "description": "Onitsha - Nnewi - Ihiala - Owerri - Umu Uvo (A3)",
+    "length": 211.514,
+    "alignment": "Inter-City"
+  },
+  "A7": {
+    "description": "Benin (RNIE6) - Chikanda - Yeshikere - Kosubosu - Kaiama Kishi - Ilorin",
+    "length": 264.558,
+    "alignment": "Inter-City"
+  },
+  "A8": {
+    "description": "Mayo Belwa Junction (A4) - Canye - Jamtari - Serti - Mayo Selbe - Gembu on the Mambilla Plateau",
+    "length": 0.0,
+    "alignment": "Inter-City"
+  },
+  "A9": {
+    "description": "Niger (N9) - Jibiya - Katsina - Miltara (A2)",
+    "length": 214.909,
+    "alignment": "Inter-City"
+  },
+  "A10": {
+    "description": "Junction with A1 - Tegina",
+    "length": 101.296,
+    "alignment": "Inter-City"
+  },
+  "A11": {
+    "description": "Rigacikun (A2) - Pambeguwa",
+    "length": 99.621,
+    "alignment": "Inter-City"
+  },
+  "A12": {
+    "description": "Katsina Ala (A4/A344) - Sabon Gida - Beli - Jalingo (A4)",
+    "length": 366.049,
+    "alignment": "Inter-City"
+  },
+  "A13": {
+    "description": "Garinkunini (A4) - Mayo - Belwa - Namtari - Jimeta - Jiberu - Gombi - Gwoza - Bama",
+    "length": 477.391,
+    "alignment": "Inter-City"
+  },
+  "A14": {
+    "description": "Ilorin (A1) - Oloru - Bode Sadu",
+    "length": 59.536,
+    "alignment": "Inter-City"
+  },
+  "A121": {
+    "description": "A1 North of Shagamu - Ijebu - Ode - Ore - Benin City",
+    "length": 35.221,
+    "alignment": "Inter-City"
+  },
+  "A121-1": {
+    "description": "E1 - Shagamu - Benin City",
+    "length": 511.104,
+    "alignment": "Inter-City"
+  },
+  "A122": {
+    "description": "lbadan - Ife - Ilesha - Akure - Oluku Junction (A121)",
+    "length": 444.904,
+    "alignment": "Inter-City"
+  },
+  "A123": {
+    "description": "Ilorin - Egbe - Kabba - Lokoja",
+    "length": 305.125,
+    "alignment": "Inter-City"
+  },
+  "A124": {
+    "description": "Bokani Junction - Enagi - Bida - Agaie - Lapai - Izom - Abuja",
+    "length": 284.165,
+    "alignment": "Inter-City"
+  },
+  "A125": {
+    "description": "Kontagora - Tegina - Mando - Kaduna",
+    "length": 300.984,
+    "alignment": "Inter-City"
+  },
+  "A126": {
+    "description": "Sokoto - Gusau - Funtua Zaria (A2)",
+    "length": 397.46,
+    "alignment": "Inter-City"
+  },
+  "A151": {
+    "description": "Iddo Railway Terminus - Iddo Flyover - Ijora Causeway - Neck Interchange (A1)",
+    "length": 5.717,
+    "alignment": "Intra-City"
+  },
+  "A152": {
+    "description": "Maryland (A1) - Ikeja (A5) - Ikeja Airport",
+    "length": 10.222,
+    "alignment": "Intra-City"
+  },
+  "A232": {
+    "description": "Benin City - Agbor - Asaba - Onitsha - Awka - Oji River (A3)",
+    "length": 285.874,
+    "alignment": "Inter-City"
+  },
+  "A232-1": {
+    "description": "Dual carriageway from Enugu - Onitsha",
+    "length": 167.476,
+    "alignment": "Inter-City"
+  },
+  "A233": {
+    "description": "Lokoja - Shintaku - Ayangba - Ankpa - Otukpa Junction (A3)",
+    "length": 194.248,
+    "alignment": "Inter-City"
+  },
+  "A234": {
+    "description": "Abuja - Keffi - Akwanga (A3)",
+    "length": 249.937,
+    "alignment": "Inter-City"
+  },
+  "A235": {
+    "description": "Kaduna - Kachia - Kafanchan - Gimi (A3)",
+    "length": 270.269,
+    "alignment": "Inter-City"
+  },
+  "A236": {
+    "description": "Zaria (A2) - Pambegua - Jos junction (A3)",
+    "length": 249.862,
+    "alignment": "Inter-City"
+  },
+  "A237": {
+    "description": "Kano - Wudil - Foggo - Kari (A3)",
+    "length": 278.925,
+    "alignment": "Inter-City"
+  },
+  "A342": {
+    "description": "Aba - Ikot Ekpene - Uyo - Oron - Calabar",
+    "length": 165.412,
+    "alignment": "Inter-City"
+  },
+  "A343": {
+    "description": "Nine Mile Corner (A3) - Enugu - Abakaliki - Ijahe Junction (A4)",
+    "length": 206.016,
+    "alignment": "Inter-City"
+  },
+  "A344": {
+    "description": "Aliade Junction (A3) - Gboko - Katsina Ala",
+    "length": 106.171,
+    "alignment": "Inter-City"
+  },
+  "A345": {
+    "description": "Bauchi - Gombe - Numan - Ngurore Junction (A13)",
+    "length": 326.86,
+    "alignment": "Inter-City"
+  },
+  "47.": {
+    "description": "",
+    "length": 13962.635,
+    "alignment": ""
+  }
+}
