@@ -40,6 +40,33 @@
       text-shadow: 1px 1px 2px #000;
       white-space: nowrap;
     }
+
+    /* Route info panel (right side) */
+    #infoPanel {
+      position: absolute;
+      top: 90px;
+      right: 10px;
+      width: 320px;
+      max-height: 70vh;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.96);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      z-index: 1200;
+      display: none; /* only visible when a route is selected */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    #infoPanel h3 {
+      margin: 0 0 6px 0;
+      font-size: 14px;
+    }
+    #infoBody p {
+      margin: 2px 0;
+    }
   </style>
 </head>
 <body>
@@ -47,7 +74,6 @@
 <div id="mapTitle">FERMA MOTORABILITY</div>
 
 <div id="controls">
-
   <label><b>Select Road Type:</b></label>
   <select id="roadType">
     <option value="">-- Select --</option>
@@ -74,14 +100,20 @@
     <option value="lt90" style="background:#00CC00;color:white;">70–90 km/h</option>
     <option value="gt90" style="background:#339933;color:white;">&gt; 90 km/h</option>
   </select>
-
 </div>
 
 <div id="map"></div>
 
+<!-- Route info panel -->
+<div id="infoPanel">
+  <h3 id="infoTitle">Route Information</h3>
+  <div id="infoBody">
+    <p>Select a road to see details.</p>
+  </div>
+</div>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-
 //////////////////////////////////////////////////////////
 // MAP INITIALIZATION
 //////////////////////////////////////////////////////////
@@ -102448,7 +102480,7 @@ const FRoads25km = {
             ] ] ] } }
 ]
 }
-    //////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 // SPEED COLOR + FILTER LOGIC
 //////////////////////////////////////////////////////////
 
@@ -102527,7 +102559,6 @@ let segmentLayer = null;
 let labelMarkers = [];
 
 function addSegmentLabels(layerGroup) {
-
   // Remove old labels
   labelMarkers.forEach(m => map.removeLayer(m));
   labelMarkers = [];
@@ -102558,7 +102589,6 @@ function addSegmentLabels(layerGroup) {
 map.on("zoomend", function () {
   if (!segmentLayer) return;
 
-  // Clear existing labels
   labelMarkers.forEach(m => map.removeLayer(m));
   labelMarkers = [];
 
@@ -102569,11 +102599,87 @@ map.on("zoomend", function () {
 
 
 //////////////////////////////////////////////////////////
+// ROAD INFO (FROM JSON: AROADS / FROADS)
+//////////////////////////////////////////////////////////
+
+let aRoadInfo = {};
+let fRoadInfo = {};
+
+// Load A roads info
+fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/aroads_info.json")
+  .then(res => res.json())
+  .then(data => {
+    aRoadInfo = data || {};
+  })
+  .catch(err => {
+    console.error("Error loading A roads info:", err);
+  });
+
+// Load F roads info
+fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/froads_info.json")
+  .then(res => res.json())
+  .then(data => {
+    fRoadInfo = data || {};
+  })
+  .catch(err => {
+    console.error("Error loading F roads info:", err);
+  });
+
+function showRouteInfo(routeName) {
+  const infoPanel = document.getElementById("infoPanel");
+  const titleEl = document.getElementById("infoTitle");
+  const bodyEl = document.getElementById("infoBody");
+  const roadType = document.getElementById("roadType").value;
+
+  if (!routeName || !roadType) {
+    infoPanel.style.display = "none";
+    return;
+  }
+
+  const source = roadType === "Aroads" ? aRoadInfo
+               : roadType === "Froads" ? fRoadInfo
+               : null;
+
+  if (!source) {
+    infoPanel.style.display = "none";
+    return;
+  }
+
+  const info = source[routeName];
+
+  if (!info) {
+    titleEl.textContent = "Route Information";
+    bodyEl.innerHTML = `
+      <p><b>Route:</b> ${routeName}</p>
+      <p>No additional information available for this route.</p>
+    `;
+    infoPanel.style.display = "block";
+    return;
+  }
+
+  const lengthText = (info.length !== null && info.length !== undefined && !isNaN(info.length))
+    ? `${Number(info.length).toFixed(3)} km`
+    : "N/A";
+
+  const alignmentText = info.alignment || "N/A";
+  const desc = info.description || "";
+
+  titleEl.textContent = "Route Information";
+  bodyEl.innerHTML = `
+    <p><b>Route:</b> ${routeName}</p>
+    <p><b>Description:</b><br>${desc}</p>
+    <p><b>Total Length:</b> ${lengthText}</p>
+    <p><b>Alignment:</b> ${alignmentText}</p>
+  `;
+  infoPanel.style.display = "block";
+}
+
+
+//////////////////////////////////////////////////////////
 // CONTROL LOGIC
 //////////////////////////////////////////////////////////
 
 function loadRoads(type) {
-
   map.removeLayer(activeRoadLayer);
   if (segmentLayer) map.removeLayer(segmentLayer);
 
@@ -102585,14 +102691,15 @@ function loadRoads(type) {
   roadList.disabled = true;
   document.getElementById("motorabilityList").disabled = true;
 
+  // Hide info panel when changing road type
+  document.getElementById("infoPanel").style.display = "none";
+
   if (type === "Aroads") {
     activeRoadLayer = L.layerGroup([AroadsLayer, AroadsLabels]).addTo(map);
     populateRouteList(Aroads);
-
   } else if (type === "Froads") {
     activeRoadLayer = L.layerGroup([FroadsLayer, FroadsLabels]).addTo(map);
     populateRouteList(Froads);
-
   } else {
     activeRoadLayer = allRoadsLayer.addTo(map);
   }
@@ -102602,7 +102709,10 @@ function populateRouteList(data) {
   const roadList = document.getElementById("roadList");
   roadList.disabled = false;
 
-  const unique = [...new Set(data.features.map(f => f.properties.ROUTE || f.properties.Route))];
+  const unique = [...new Set(
+    data.features.map(f => f.properties.ROUTE || f.properties.Route)
+  )];
+
   unique.forEach(route => {
     let opt = document.createElement("option");
     opt.value = route;
@@ -102612,7 +102722,10 @@ function populateRouteList(data) {
 }
 
 function highlightRoute(routeName) {
-  if (!routeName) return;
+  if (!routeName) {
+    document.getElementById("infoPanel").style.display = "none";
+    return;
+  }
 
   const roadType = document.getElementById("roadType").value;
   const dataset = (roadType === "Aroads") ? ARoads25km : FRoads25km;
@@ -102644,20 +102757,19 @@ function highlightRoute(routeName) {
     }
   }).addTo(map);
 
-  // Segment labels only if zoomed in
   if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
 
-  // Zoom to route
-  if (segmentLayer.getBounds().isValid()) {
+  if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) {
     map.fitBounds(segmentLayer.getBounds(), { animate: true });
   }
 
   document.getElementById("motorabilityList").disabled = false;
+
+  // 🔹 Update info panel for selected route
+  showRouteInfo(routeName);
 }
 
-
 document.getElementById("motorabilityList").addEventListener("change", function () {
-
   const cat = this.value;
   const roadType = document.getElementById("roadType").value;
   const route = document.getElementById("roadList").value;
@@ -102693,15 +102805,16 @@ document.getElementById("motorabilityList").addEventListener("change", function 
 
   if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
 
-  if (segmentLayer.getBounds().isValid()) {
+  if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) {
     map.fitBounds(segmentLayer.getBounds(), { animate: true });
   }
-});
 
+  // Keep showing same route info in the side panel
+  if (route) showRouteInfo(route);
+});
 
 document.getElementById("roadType").addEventListener("change", e => loadRoads(e.target.value));
 document.getElementById("roadList").addEventListener("change", e => highlightRoute(e.target.value));
-
 </script>
 </body>
 </html>
