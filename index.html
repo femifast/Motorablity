@@ -6,127 +6,186 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    body { margin: 0; padding: 0; }
-    #map { height: 90vh; width: 100%; }
-    #controls {
-      padding: 10px;
-      background: #f0f0f0;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
-    #mapTitle {
-      position: absolute;
-      top: 40px; left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: rgba(255,255,255,0.8);
-      padding: 8px 20px;
-      border-radius: 5px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .segment-label {
-      font-size: 11px;
-      font-weight: bold;
-      color: #000;
-      text-shadow: 1px 1px 2px white;
-    }
-    .route-label {
-      pointer-events: none;
-      text-align: center;
-      color: lightgreen;
-      font-size: 11px;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px #000;
-      white-space: nowrap;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: radial-gradient(circle at top, #1a2440 0, #050814 55%, #020308 100%);
+      color: #f5f5f5;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    /* Route info panel (right side) */
-    #infoPanel {
-      position: absolute;
-      top: 90px;
-      right: 10px;
-      width: 320px;
-      max-height: 70vh;
-      overflow-y: auto;
-      background: rgba(255,255,255,0.96);
+    /* Brand logo (top-left) */
+    #brandLogo {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1600;
+      width: 56px;
+      height: 56px;
       border-radius: 8px;
-      padding: 10px 12px;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.06);
+      background: white;
+      padding: 4px;
+      object-fit: contain;
+      cursor: default;
+    }
+
+    #mapTitle {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1400;
+      background: rgba(10, 14, 30, 0.9);
+      padding: 8px 22px;
+      border-radius: 999px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: #f9fafb;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Layout */
+    #layout {
+      display: flex;
+      height: 100vh;
+      padding-top: 64px; /* room for title */
+    }
+
+    #leftPane { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; }
+    #map { flex: 1 1 auto; width: 100%; }
+
+    /* Controls */
+    #controlsWrapper { position: relative; z-index: 1300; padding: 12px 16px 6px 16px; }
+    #controls {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.92);
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(12px);
+      align-items: center;
+    }
+    #controls label { font-size: 13px; font-weight: 600; color: #e5e7eb; }
+    #controls select {
+      min-width: 160px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .12s, box-shadow .12s;
+    }
+    #controls select:focus { border-color: #38bdf8; box-shadow: 0 0 0 1px rgba(56,189,248,0.18); }
+
+    /* Info panel */
+    #infoPanel {
+      width: 360px;
+      max-width: 36%;
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.5), rgba(15, 23, 42, 0.98));
+      border-left: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 16px 18px;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: -12px 0 35px rgba(15, 23, 42, 0.8);
       z-index: 1200;
-      display: none; /* only visible when a route is selected */
-      word-wrap: break-word;
-      overflow-wrap: break-word;
     }
-    #infoPanel h3 {
-      margin: 0 0 6px 0;
-      font-size: 14px;
-    }
-    #infoBody p {
-      margin: 2px 0;
+    #infoPanel h2 { font-size: 16px; margin: 0 0 4px; font-weight: 600; color: #f9fafb; display:flex; align-items:center; gap:6px; }
+    #infoPanel h2 span.badge { font-size:11px; padding: 2px 8px; border-radius:999px; background: rgba(15,23,42,0.9); border:1px solid rgba(148,163,184,0.7); text-transform:uppercase; }
+    #infoPanel .subtitle { font-size: 12px; color: #a5b4fc; margin-bottom: 6px; }
+    #infoPanel .info-body { font-size:13px; line-height:1.45; background: rgba(15,23,42,0.75); border-radius:12px; padding:10px 12px; border:1px solid rgba(148,163,184,0.3); max-height: calc(100vh - 130px); overflow-y:auto; }
+    #infoPanel .label { font-size:11px; color:#9ca3af; text-transform:uppercase; margin-top:6px; }
+
+    /* labels and popups */
+    .route-label { pointer-events: none; text-align: center; color: lightgreen; font-size:11px; font-weight:700; text-shadow: 1px 1px 2px #000; white-space:nowrap; }
+    .segment-label { font-size:11px; font-weight:700; color:#000; text-shadow: 1px 1px 2px white; }
+    .leaflet-popup-content { font-size:12px !important; line-height: 1.3em; color: #fff; text-shadow: 1px 1px 2px #000; font-weight:700; }
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.3); }
+
+    @media (max-width: 900px) {
+      #layout { flex-direction: column; }
+      #infoPanel { width: 100%; max-width: 100%; box-shadow: 0 -12px 30px rgba(15, 23, 42, 0.75); border-left:none; border-top:1px solid rgba(148,163,184,0.4); }
+      #brandLogo { left: 8px; top: 8px; width:48px; height:48px; }
+      #mapTitle { top:8px; padding:6px 14px; font-size:16px; }
     }
   </style>
 </head>
 <body>
 
-<div id="mapTitle">FERMA MOTORABILITY</div>
+  <!-- Place "FERMA_logo.jpg" in same folder or change src to your hosted raw URL -->
+  <img id="brandLogo" src="FERMA_logo.jpg" alt="FERMA" title="Federal Roads Maintenance Agency (FERMA)" />
 
-<div id="controls">
-  <label><b>Select Road Type:</b></label>
-  <select id="roadType">
-    <option value="">-- Select --</option>
-    <option value="Aroads">A Roads</option>
-    <option value="Froads">F Roads</option>
-  </select>
+  <div id="mapTitle">FERMA MOTORABILITY</div>
 
-  &nbsp;&nbsp;
+  <div id="layout">
+    <div id="leftPane">
+      <div id="controlsWrapper">
+        <div id="controls">
+          <label><b>Road Type:</b></label>
+          <select id="roadType">
+            <option value="">All Roads</option>
+            <option value="Aroads">A Roads</option>
+            <option value="Froads">F Roads</option>
+          </select>
 
-  <label><b>Select Route:</b></label>
-  <select id="roadList" disabled>
-    <option value="">-- Select Route --</option>
-  </select>
+          <label><b>Route:</b></label>
+          <select id="roadList" disabled>
+            <option value="">-- Select Route --</option>
+          </select>
 
-  &nbsp;&nbsp;
+          <label><b>Motorability:</b></label>
+          <select id="motorabilityList" disabled>
+            <option value="">-- Speed filter --</option>
+            <option value="nospeed" style="background:#808080;color:white;">No Speed</option>
+            <option value="lt40" style="background:#FF0000;color:white;">&lt; 40 km/h</option>
+            <option value="lt60" style="background:#FF9966;">40–60 km/h</option>
+            <option value="lt70" style="background:#FFFFCC;">60–70 km/h</option>
+            <option value="lt90" style="background:#00CC00;color:white;">70–90 km/h</option>
+            <option value="gt90" style="background:#339933;color:white;">&gt; 90 km/h</option>
+          </select>
+        </div>
+      </div>
 
-  <label><b>Motorability:</b></label>
-  <select id="motorabilityList" disabled>
-    <option value="">-- Select Speed Range --</option>
-    <option value="nospeed" style="background:#808080;color:white;">No Speed</option>
-    <option value="lt40" style="background:#FF0000;color:white;">&lt; 40 km/h</option>
-    <option value="lt60" style="background:#FF9966;">40–60 km/h</option>
-    <option value="lt70" style="background:#FFFFCC;">60–70 km/h</option>
-    <option value="lt90" style="background:#00CC00;color:white;">70–90 km/h</option>
-    <option value="gt90" style="background:#339933;color:white;">&gt; 90 km/h</option>
-  </select>
-</div>
+      <div id="map"></div>
+    </div>
 
-<div id="map"></div>
-
-<!-- Route info panel -->
-<div id="infoPanel">
-  <h3 id="infoTitle">Route Information</h3>
-  <div id="infoBody">
-    <p>Select a road to see details.</p>
+    <aside id="infoPanel" aria-hidden="true">
+      <h2>Route Info <span class="badge">Motorability</span></h2>
+      <div class="subtitle">Select a route to show details here.</div>
+      <div class="info-body" id="infoBody">
+        <p class="muted">No route selected. Pick a Road Type and select a Route to view motorability and description.</p>
+      </div>
+    </aside>
   </div>
-</div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-//////////////////////////////////////////////////////////
-// MAP INITIALIZATION
-//////////////////////////////////////////////////////////
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+  // ===========================
+  // MAP INITIALIZATION
+  // ===========================
+  const nigeriaBounds = L.latLngBounds([4.2, 2.7], [13.9, 14.7]);
+  const map = L.map("map").fitBounds(nigeriaBounds);
+  map.setMaxBounds(nigeriaBounds);
 
-const nigeriaBounds = L.latLngBounds([4.2, 2.7], [13.9, 14.7]);
-const map = L.map("map").fitBounds(nigeriaBounds);
-map.setMaxBounds(nigeriaBounds);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 18,
-  attribution: "&copy; OpenStreetMap contributors"
-}).addTo(map);
-  
  // ========================
     // SAMPLE DATA
     // ========================
@@ -102480,341 +102539,219 @@ const FRoads25km = {
             ] ] ] } }
 ]
 }
-//////////////////////////////////////////////////////////
-// SPEED COLOR + FILTER LOGIC
-//////////////////////////////////////////////////////////
+ // ===========================
+  // SPEED COLOR + FILTER LOGIC
+  // ===========================
+  function getSpeedColor(speed) {
+    const s = Number(speed);
+    if (!Number.isFinite(s) || s === 0) return "#808080"; // no speed -> gray
+    if (s < 40) return "#FF0000";
+    if (s < 60) return "#FF9966";
+    if (s < 70) return "#FFFFCC";
+    if (s < 90) return "#00CC00";
+    return "#339933";
+  }
+  function inSpeedRange(speed, category) {
+    const s = Number(speed);
+    if (category === "nospeed") return (!Number.isFinite(s) || s === 0);
+    if (!Number.isFinite(s) || s === 0) return false;
+    if (category === "lt40") return s < 40;
+    if (category === "lt60") return s >= 40 && s < 60;
+    if (category === "lt70") return s >= 60 && s < 70;
+    if (category === "lt90") return s >= 70 && s < 90;
+    if (category === "gt90") return s >= 90;
+    return true;
+  }
 
-function getSpeedColor(speed) {
-  const s = Number(speed);
-  if (!Number.isFinite(s) || s === 0) return "#808080";   // NO SPEED = GRAY
-  if (s < 40) return "#FF0000";
-  if (s < 60) return "#FF9966";
-  if (s < 70) return "#FFFFCC";
-  if (s < 90) return "#00CC00";
-  return "#339933";
-}
-
-function inSpeedRange(speed, category) {
-  const s = Number(speed);
-  if (category === "nospeed") return (!Number.isFinite(s) || s === 0);
-  if (!Number.isFinite(s) || s === 0) return false;
-  if (category === "lt40") return s < 40;
-  if (category === "lt60") return s >= 40 && s < 60;
-  if (category === "lt70") return s >= 60 && s < 70;
-  if (category === "lt90") return s >= 70 && s < 90;
-  if (category === "gt90") return s >= 90;
-  return true;
-}
-
-
-//////////////////////////////////////////////////////////
-// ROUTE LABELS (ALWAYS VISIBLE)
-//////////////////////////////////////////////////////////
-
-function addRouteLabels(geojsonData) {
-  const labelLayer = L.layerGroup();
-  geojsonData.features.forEach(feature => {
-    const name = feature.properties.ROUTE || feature.properties.Route;
-    if (!name) return;
-
-    let coords = [];
-    if (feature.geometry.type === "MultiLineString") coords = feature.geometry.coordinates.flat(1);
-    if (feature.geometry.type === "LineString") coords = feature.geometry.coordinates;
-
-    if (!coords.length) return;
-    let mid = coords[Math.floor(coords.length / 2)];
-    let lng = mid[0], lat = mid[1];
-
-    const label = L.marker([lat, lng], {
-      icon: L.divIcon({
-        className: "route-label",
-        html: `<div>${name}</div>`
-      }),
-      interactive: false
+  // ===========================
+  // ROUTE LABELS
+  // ===========================
+  function addRouteLabels(geojsonData) {
+    const labelLayer = L.layerGroup();
+    (geojsonData?.features || []).forEach(feature => {
+      const name = feature.properties?.ROUTE || feature.properties?.Route;
+      if (!name) return;
+      let coords = [];
+      if (feature.geometry?.type === "MultiLineString") coords = feature.geometry.coordinates.flat(1);
+      if (feature.geometry?.type === "LineString") coords = feature.geometry.coordinates;
+      if (!coords.length) return;
+      const mid = coords[Math.floor(coords.length / 2)];
+      const lng = mid[0], lat = mid[1];
+      const label = L.marker([lat, lng], {
+        icon: L.divIcon({ className: "route-label", html: `<div>${name}</div>` }),
+        interactive: false
+      });
+      label.addTo(labelLayer);
     });
-    label.addTo(labelLayer);
+    return labelLayer;
+  }
+
+  const AroadsLayer = L.geoJSON(Aroads, { style: { color: "#38bdf8", weight: 1.5 } });
+  const FroadsLayer = L.geoJSON(Froads, { style: { color: "#fb7185", weight: 1.5 } });
+  const AroadsLabels = addRouteLabels(Aroads);
+  const FroadsLabels = addRouteLabels(Froads);
+  const AroadsGroup = L.layerGroup([AroadsLayer, AroadsLabels]);
+  const FroadsGroup = L.layerGroup([FroadsLayer, FroadsLabels]);
+  const allRoadsLayer = L.layerGroup([AroadsLayer, FroadsLayer, AroadsLabels, FroadsLabels]).addTo(map);
+
+  let activeRoadLayer = allRoadsLayer;
+  let segmentLayer = null;
+
+  // ===========================
+  // SEGMENT LABELS (zoom controlled)
+  // ===========================
+  let labelMarkers = [];
+  function addSegmentLabels(layerGroup) {
+    labelMarkers.forEach(m => map.removeLayer(m));
+    labelMarkers = [];
+    if (map.getZoom() < 9) return;
+    layerGroup.eachLayer(layer => {
+      const p = layer.feature.properties;
+      const segId = p.Segment || p.NAME;
+      if (!segId) return;
+      const center = layer.getBounds().getCenter();
+      const label = L.marker(center, {
+        icon: L.divIcon({ className: "segment-label", html: segId }),
+        interactive: false
+      }).addTo(map);
+      labelMarkers.push(label);
+    });
+  }
+  map.on("zoomend", () => {
+    if (!segmentLayer) return;
+    labelMarkers.forEach(m => map.removeLayer(m));
+    labelMarkers = [];
+    if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
   });
-  return labelLayer;
-}
 
-const AroadsLabels = addRouteLabels(Aroads);
-const FroadsLabels = addRouteLabels(Froads);
+  // ===========================
+  // ROAD INFO JSONs (fetched)
+  // ===========================
+  let aRoadInfo = {}, fRoadInfo = {};
+  fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/aroads_info.json")
+    .then(r => r.json()).then(d => aRoadInfo = d).catch(e => console.warn("A info load:", e));
+  fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/froads_info.json")
+    .then(r => r.json()).then(d => fRoadInfo = d).catch(e => console.warn("F info load:", e));
 
-const AroadsLayer = L.geoJSON(Aroads, { style: { color: "blue", weight: 1.5 } });
-const FroadsLayer = L.geoJSON(Froads, { style: { color: "red", weight: 1.5 } });
+  // Info panel helpers
+  const infoPanel = document.getElementById("infoPanel");
+  const infoBody = document.getElementById("infoBody");
+  function showOverview() {
+    infoBody.innerHTML = '<p class="muted">No route selected. Pick a Road Type and select a Route to view motorability and description.</p>';
+    infoPanel.style.display = "flex";
+  }
+  function showRouteInfo(routeName) {
+    const roadType = document.getElementById("roadType").value;
+    if (!routeName || !roadType) { infoPanel.style.display = "none"; return; }
+    const source = roadType === "Aroads" ? aRoadInfo : fRoadInfo;
+    const info = source?.[routeName];
+    infoPanel.style.display = "flex";
+    if (!info) {
+      infoBody.innerHTML = `<p><b>Route:</b> ${routeName}</p><p class="muted">No additional info available.</p>`;
+      return;
+    }
+    const lengthText = (info.length != null && !isNaN(info.length)) ? `${Number(info.length).toFixed(3)} km` : "N/A";
+    infoBody.innerHTML = `
+      <p class="label">Route</p><p><b>${routeName}</b></p>
+      <p class="label">Description</p><p>${(info.description || "No description")}</p>
+      <p class="label">Total length</p><p>${lengthText}</p>
+      <p class="label">Alignment</p><p>${(info.alignment || "N/A")}</p>
+    `;
+  }
 
-const allRoadsLayer = L.layerGroup([
-  AroadsLayer, FroadsLayer,
-  AroadsLabels, FroadsLabels
-]).addTo(map);
+  // ===========================
+  // LOAD / POPULATE / HIGHLIGHT LOGIC
+  // ===========================
+  function loadRoads(type) {
+    map.removeLayer(activeRoadLayer);
+    if (segmentLayer) { map.removeLayer(segmentLayer); segmentLayer = null; }
+    labelMarkers.forEach(m => map.removeLayer(m)); labelMarkers = [];
+    document.getElementById("roadList").innerHTML = '<option value="">-- Select Route --</option>';
+    document.getElementById("roadList").disabled = true;
+    document.getElementById("motorabilityList").disabled = true;
+    infoPanel.style.display = "none";
 
-let activeRoadLayer = allRoadsLayer;
-let segmentLayer = null;
+    if (type === "Aroads") {
+      activeRoadLayer = AroadsGroup.addTo(map);
+      populateRouteList(Aroads);
+    } else if (type === "Froads") {
+      activeRoadLayer = FroadsGroup.addTo(map);
+      populateRouteList(Froads);
+    } else {
+      activeRoadLayer = allRoadsLayer.addTo(map);
+    }
+  }
 
+  function populateRouteList(data) {
+    const roadList = document.getElementById("roadList");
+    roadList.disabled = false;
+    roadList.innerHTML = '<option value="">-- Select Route --</option>';
+    const unique = [...new Set((data.features || []).map(f => f.properties.ROUTE || f.properties.Route))];
+    unique.forEach(route => {
+      const opt = document.createElement("option");
+      opt.value = route;
+      opt.textContent = route;
+      roadList.appendChild(opt);
+    });
+  }
 
-//////////////////////////////////////////////////////////
-// SEGMENT LABELS (ONLY when zoom >= 9)
-//////////////////////////////////////////////////////////
+  function highlightRoute(routeName) {
+    if (!routeName) { infoPanel.style.display = "none"; return; }
+    if (segmentLayer) { map.removeLayer(segmentLayer); segmentLayer = null; }
+    labelMarkers.forEach(m => map.removeLayer(m)); labelMarkers = [];
 
-let labelMarkers = [];
+    const roadType = document.getElementById("roadType").value;
+    const dataset = (roadType === "Aroads") ? ARoads25km : FRoads25km;
+    const filtered = (dataset.features || []).filter(f => (f.properties.Route || f.properties.ROUTE) === routeName);
 
-function addSegmentLabels(layerGroup) {
-  // Remove old labels
-  labelMarkers.forEach(m => map.removeLayer(m));
-  labelMarkers = [];
-
-  // Only show when zoom >= 9
-  if (map.getZoom() < 9) return;
-
-  layerGroup.eachLayer(layer => {
-    const p = layer.feature.properties;
-    const segId = p.Segment || p.NAME;
-    if (!segId) return;
-
-    const center = layer.getBounds().getCenter();
-
-    const label = L.marker(center, {
-      icon: L.divIcon({
-        className: "segment-label",
-        html: segId
-      }),
-      interactive: false
+    segmentLayer = L.geoJSON(filtered, {
+      style: f => ({ color: getSpeedColor(f.properties.Speed), weight: 5 }),
+      onEachFeature: (f, l) => {
+        const p = f.properties;
+        const len = p.len ?? p.Length ?? "";
+        l.bindPopup(`<b>${p.Segment || ""}</b><br>${p.NAME || ""}<br>State: ${p.State || ""}<br>LGA: ${p.Lga || ""}<br>Length: ${len} km<br>Speed: ${p.Speed ?? "No data"}`);
+      }
     }).addTo(map);
 
-    labelMarkers.push(label);
-  });
-}
+    if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
+    if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) map.fitBounds(segmentLayer.getBounds(), { animate: true });
 
-// Auto-update labels when zooming
-map.on("zoomend", function () {
-  if (!segmentLayer) return;
-
-  labelMarkers.forEach(m => map.removeLayer(m));
-  labelMarkers = [];
-
-  if (map.getZoom() >= 9) {
-    addSegmentLabels(segmentLayer);
+    document.getElementById("motorabilityList").disabled = false;
+    showRouteInfo(routeName);
   }
-});
 
+  // motorability filter handler
+  document.getElementById("motorabilityList").addEventListener("change", function () {
+    const cat = this.value;
+    const roadType = document.getElementById("roadType").value;
+    const route = document.getElementById("roadList").value;
+    const dataset = (roadType === "Aroads") ? ARoads25km : FRoads25km;
+    if (segmentLayer) { map.removeLayer(segmentLayer); segmentLayer = null; }
+    labelMarkers.forEach(m => map.removeLayer(m)); labelMarkers = [];
 
-//////////////////////////////////////////////////////////
-// ROAD INFO (FROM JSON: AROADS / FROADS)
-//////////////////////////////////////////////////////////
+    const filtered = (dataset.features || []).filter(f => (f.properties.Route || f.properties.ROUTE) === route && inSpeedRange(f.properties.Speed, cat));
+    segmentLayer = L.geoJSON(filtered, {
+      style: f => ({ color: getSpeedColor(f.properties.Speed), weight: 5 }),
+      onEachFeature: (f, l) => {
+        const p = f.properties;
+        const len = p.len ?? p.Length ?? "";
+        l.bindPopup(`<b>${p.Segment || ""}</b><br>${p.NAME || ""}<br>State: ${p.State || ""}<br>LGA: ${p.Lga || ""}<br>Length: ${len} km<br>Speed: ${p.Speed ?? "No data"}`);
+      }
+    }).addTo(map);
 
-let aRoadInfo = {};
-let fRoadInfo = {};
+    if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
+    if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) map.fitBounds(segmentLayer.getBounds(), { animate: true });
 
-// Load A roads info
-fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/aroads_info.json")
-  .then(res => res.json())
-  .then(data => {
-    aRoadInfo = data || {};
-  })
-  .catch(err => {
-    console.error("Error loading A roads info:", err);
+    if (route) showRouteInfo(route);
   });
 
-// Load F roads info
-fetch("https://raw.githubusercontent.com/femifast/Motorablity/refs/heads/main/froads_info.json")
-  .then(res => res.json())
-  .then(data => {
-    fRoadInfo = data || {};
-  })
-  .catch(err => {
-    console.error("Error loading F roads info:", err);
-  });
+  // wire up controls
+  document.getElementById("roadType").addEventListener("change", e => loadRoads(e.target.value));
+  document.getElementById("roadList").addEventListener("change", e => highlightRoute(e.target.value));
 
-function showRouteInfo(routeName) {
-  const infoPanel = document.getElementById("infoPanel");
-  const titleEl = document.getElementById("infoTitle");
-  const bodyEl = document.getElementById("infoBody");
-  const roadType = document.getElementById("roadType").value;
+  // show overview on load
+  showOverview();
 
-  if (!routeName || !roadType) {
-    infoPanel.style.display = "none";
-    return;
-  }
-
-  const source = roadType === "Aroads" ? aRoadInfo
-               : roadType === "Froads" ? fRoadInfo
-               : null;
-
-  if (!source) {
-    infoPanel.style.display = "none";
-    return;
-  }
-
-  const info = source[routeName];
-
-  if (!info) {
-    titleEl.textContent = "Route Information";
-    bodyEl.innerHTML = `
-      <p><b>Route:</b> ${routeName}</p>
-      <p>No additional information available for this route.</p>
-    `;
-    infoPanel.style.display = "block";
-    return;
-  }
-
-  const lengthText = (info.length !== null && info.length !== undefined && !isNaN(info.length))
-    ? `${Number(info.length).toFixed(3)} km`
-    : "N/A";
-
-  const alignmentText = info.alignment || "N/A";
-  const desc = info.description || "";
-
-  titleEl.textContent = "Route Information";
-  bodyEl.innerHTML = `
-    <p><b>Route:</b> ${routeName}</p>
-    <p><b>Description:</b><br>${desc}</p>
-    <p><b>Total Length:</b> ${lengthText}</p>
-    <p><b>Alignment:</b> ${alignmentText}</p>
-  `;
-  infoPanel.style.display = "block";
-}
-
-
-//////////////////////////////////////////////////////////
-// CONTROL LOGIC
-//////////////////////////////////////////////////////////
-
-function loadRoads(type) {
-  map.removeLayer(activeRoadLayer);
-  if (segmentLayer) map.removeLayer(segmentLayer);
-
-  labelMarkers.forEach(m => map.removeLayer(m));
-  labelMarkers = [];
-
-  const roadList = document.getElementById("roadList");
-  roadList.innerHTML = `<option value="">-- Select Route --</option>`;
-  roadList.disabled = true;
-  document.getElementById("motorabilityList").disabled = true;
-
-  // Hide info panel when changing road type
-  document.getElementById("infoPanel").style.display = "none";
-
-  if (type === "Aroads") {
-    activeRoadLayer = L.layerGroup([AroadsLayer, AroadsLabels]).addTo(map);
-    populateRouteList(Aroads);
-  } else if (type === "Froads") {
-    activeRoadLayer = L.layerGroup([FroadsLayer, FroadsLabels]).addTo(map);
-    populateRouteList(Froads);
-  } else {
-    activeRoadLayer = allRoadsLayer.addTo(map);
-  }
-}
-
-function populateRouteList(data) {
-  const roadList = document.getElementById("roadList");
-  roadList.disabled = false;
-
-  const unique = [...new Set(
-    data.features.map(f => f.properties.ROUTE || f.properties.Route)
-  )];
-
-  unique.forEach(route => {
-    let opt = document.createElement("option");
-    opt.value = route;
-    opt.textContent = route;
-    roadList.appendChild(opt);
-  });
-}
-
-function highlightRoute(routeName) {
-  if (!routeName) {
-    document.getElementById("infoPanel").style.display = "none";
-    return;
-  }
-
-  const roadType = document.getElementById("roadType").value;
-  const dataset = (roadType === "Aroads") ? ARoads25km : FRoads25km;
-
-  if (segmentLayer) map.removeLayer(segmentLayer);
-  labelMarkers.forEach(m => map.removeLayer(m));
-  labelMarkers = [];
-
-  const filtered = dataset.features.filter(f =>
-    (f.properties.Route || f.properties.ROUTE) === routeName
-  );
-
-  segmentLayer = L.geoJSON(filtered, {
-    style: f => ({
-      color: getSpeedColor(f.properties.Speed),
-      weight: 5
-    }),
-    onEachFeature: (f, l) => {
-      const p = f.properties;
-      const len = p.len ?? p.Length ?? "";
-      l.bindPopup(`
-        <b>${p.Segment || ""}</b><br>
-        ${p.NAME || ""}<br>
-        State: ${p.State || ""}<br>
-        LGA: ${p.Lga || ""}<br>
-        Length: ${len} km<br>
-        Speed: ${p.Speed ?? "No data"}
-      `);
-    }
-  }).addTo(map);
-
-  if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
-
-  if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) {
-    map.fitBounds(segmentLayer.getBounds(), { animate: true });
-  }
-
-  document.getElementById("motorabilityList").disabled = false;
-
-  // 🔹 Update info panel for selected route
-  showRouteInfo(routeName);
-}
-
-document.getElementById("motorabilityList").addEventListener("change", function () {
-  const cat = this.value;
-  const roadType = document.getElementById("roadType").value;
-  const route = document.getElementById("roadList").value;
-  const dataset = (roadType === "Aroads") ? ARoads25km : FRoads25km;
-
-  if (segmentLayer) map.removeLayer(segmentLayer);
-  labelMarkers.forEach(m => map.removeLayer(m));
-  labelMarkers = [];
-
-  const filtered = dataset.features.filter(f =>
-    (f.properties.Route || f.properties.ROUTE) === route &&
-    inSpeedRange(f.properties.Speed, cat)
-  );
-
-  segmentLayer = L.geoJSON(filtered, {
-    style: f => ({
-      color: getSpeedColor(f.properties.Speed),
-      weight: 5
-    }),
-    onEachFeature: (f, l) => {
-      const p = f.properties;
-      const len = p.len ?? p.Length ?? "";
-      l.bindPopup(`
-        <b>${p.Segment || ""}</b><br>
-        ${p.NAME || ""}<br>
-        State: ${p.State || ""}<br>
-        LGA: ${p.Lga || ""}<br>
-        Length: ${len} km<br>
-        Speed: ${p.Speed ?? "No data"}
-      `);
-    }
-  }).addTo(map);
-
-  if (map.getZoom() >= 9) addSegmentLabels(segmentLayer);
-
-  if (segmentLayer.getBounds && segmentLayer.getBounds().isValid()) {
-    map.fitBounds(segmentLayer.getBounds(), { animate: true });
-  }
-
-  // Keep showing same route info in the side panel
-  if (route) showRouteInfo(route);
-});
-
-document.getElementById("roadType").addEventListener("change", e => loadRoads(e.target.value));
-document.getElementById("roadList").addEventListener("change", e => highlightRoute(e.target.value));
-</script>
+  </script>
 </body>
 </html>
