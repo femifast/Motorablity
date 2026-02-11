@@ -111,8 +111,38 @@
     #infoPanel .label { font-size:11px; color:#9ca3af; text-transform:uppercase; margin-top:6px; }
 
     /* labels and popups */
-    .route-label { pointer-events: none; text-align: center; color: lightgreen; font-size:11px; font-weight:700; text-shadow: 1px 1px 2px #000; white-space:nowrap; }
-    .segment-label { font-size:11px; font-weight:700; color:#000; text-shadow: 1px 1px 2px white; }
+    /* ===========================
+   ROUTE LABEL – clean light badge
+=========================== */
+
+.route-label {
+  background: none !important;   /* remove Leaflet default box */
+  border: none !important;
+}
+
+.route-label div {
+  display: inline-block;          /* makes box fit text */
+  width: auto;
+  height: auto;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+
+  color: #FF2D55;                 /* keep your red text */
+
+  background: rgba(240,240,240,0.85); /* LIGHT gray */
+  padding: 2px 6px;
+
+  border-radius: 4px;
+
+  white-space: nowrap;
+  line-height: 1.2;
+
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+    .segment-label { font-size:19px; font-weight:700; color:#000; text-shadow: 1px 1px 2px white; }
     .leaflet-popup-content { font-size:12px !important; line-height: 1.3em; color: #fff; text-shadow: 1px 1px 2px #000; font-weight:700; }
     .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.3); }
 
@@ -181,10 +211,23 @@
   const map = L.map("map").fitBounds(nigeriaBounds);
   map.setMaxBounds(nigeriaBounds);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 18,
-    attribution: "&copy; OpenStreetMap contributors"
-  }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+  subdomains: 'abcd',
+  maxZoom: 20
+}).addTo(map);
+fetch("nigeria.geojson")
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: {
+        color: "#bdbdbd",
+        weight: 2,
+        dashArray: "4",
+        fill: false
+      }
+    }).addTo(map);
+  });
 
  // ========================
     // SAMPLE DATA
@@ -102545,10 +102588,10 @@ const FRoads25km = {
   function getSpeedColor(speed) {
     const s = Number(speed);
     if (!Number.isFinite(s) || s === 0) return "#808080"; // no speed -> gray
-    if (s < 40) return "#FF0000";
-    if (s < 60) return "#FF9966";
-    if (s < 70) return "#FFFFCC";
-    if (s < 90) return "#00CC00";
+    if (s < 40) return "#F70202";
+    if (s < 60) return "#FF8D28";
+    if (s < 70) return "#2A6FDD";
+    if (s < 90) return "#1F8A70";
     return "#339933";
   }
   function inSpeedRange(speed, category) {
@@ -102586,8 +102629,8 @@ const FRoads25km = {
     return labelLayer;
   }
 
-  const AroadsLayer = L.geoJSON(Aroads, { style: { color: "#38bdf8", weight: 1.5 } });
-  const FroadsLayer = L.geoJSON(Froads, { style: { color: "#fb7185", weight: 1.5 } });
+  const AroadsLayer = L.geoJSON(Aroads, { style: { color: "#38bdf8", weight: 2.0 } });
+  const FroadsLayer = L.geoJSON(Froads, { style: { color: "#fb7185", weight: 2.0 } });
   const AroadsLabels = addRouteLabels(Aroads);
   const FroadsLabels = addRouteLabels(Froads);
   const AroadsGroup = L.layerGroup([AroadsLayer, AroadsLabels]);
@@ -102705,7 +102748,7 @@ const FRoads25km = {
     const filtered = (dataset.features || []).filter(f => (f.properties.Route || f.properties.ROUTE) === routeName);
 
     segmentLayer = L.geoJSON(filtered, {
-      style: f => ({ color: getSpeedColor(f.properties.Speed), weight: 5 }),
+      style: f => ({ color: getSpeedColor(f.properties.Speed), weight: 4 }),
       onEachFeature: (f, l) => {
         const p = f.properties;
         const len = p.len ?? p.Length ?? "";
